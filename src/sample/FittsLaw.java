@@ -8,10 +8,32 @@ import javafx.stage.Screen;
 import java.awt.*;
 import java.util.*;
 
+/**
+ * FittsLaw class.
+ * To make experiments with the Fitts law formula, and returning results of such experiments.
+ *
+ * @author Alice B.
+ * @version 05/03/2021
+ */
 public class FittsLaw {
+    /**
+     * Distance between the pointer device and the center of the current circle drawn.
+     */
     private double distance;
+    /**
+     * Diameter of the current circle drawn.
+     */
     private int diameter;
 
+    /**
+     * To create a new test :
+     * - Clear the circle previously drawn.
+     * - Generate a new random circle (randomX, randomY, randomDiameter) to be drawn on the object passed in param.
+     *   (Note : The random values are generated according to boundaries : screenWidth, screenHeight).
+     * - Calculate the current distance between the pointing device and the circle just drawn.
+     *
+     * @param root The object on which the circle is appended.
+     */
     public void experiment(Group root) {
         // Get the bounds of the screen.
         Screen screen = Screen.getPrimary();
@@ -44,26 +66,69 @@ public class FittsLaw {
         this.distance = calculateDistance(cursor_xPos, cursor_yPos, circle_centerXPos, circle_centerYPos);
     }
 
+    /**
+     * To calculate the Index of Difficulty -> ID = log2(1 + D/W)
+     *
+     * @return The ID calculated.
+     */
     public double calculate_ID() {
         return Math.log(1 + this.distance / this.diameter) / Math.log(2);
     }
 
+    /**
+     * To get the current position of the cursor (P<x, y>).
+     *
+     * @return The point (position) where the pointer device is.
+     */
     public Point getCursorPos() {
         return MouseInfo.getPointerInfo().getLocation();
     }
 
+    /**
+     * To calculate the distance between the pointer device and the center of the circle,
+     * thanks to the Euclidean distance formula -> d(P1, P2) = sqrt((P2x - P1x)² + (P2y - P1y)²)
+     *
+     * @param cursor_xPos x pos of the cursor. P1<x, ...>
+     * @param cursor_yPos y pos of the cursor. P1<..., y>
+     * @param circle_centerXPos x center pos of the circle. P2<x, ...>
+     * @param circle_centerYPos y center pos of the circle. P2<..., y>
+     *
+     * @return The distance calculated.
+     */
     public double calculateDistance(int cursor_xPos, int cursor_yPos, float circle_centerXPos, float circle_centerYPos) {
         return Math.sqrt(Math.pow(cursor_xPos - circle_centerXPos, 2) + Math.pow(cursor_yPos - circle_centerYPos, 2));
     }
 
+    /**
+     * Distance getter.
+     *
+     * @return The distance between the pointer device and the center of the circle.
+     */
     public double getDistance() {
         return this.distance;
     }
 
+    /**
+     * Diameter getter.
+     *
+     * @return The diameter of the circle.
+     */
     public double getDiameter() {
         return this.diameter;
     }
 
+    /**
+     * To build results of the experiment, readable for a Human Being.
+     *
+     * @param i The current test number.
+     * @param initTime The time where the new test has been requested by the user (at the initialization or when requested a new test) (in ms).
+     * @return A map containing the results :
+     *          - testNumber (i).
+     *          - time used by the user to select a circle drawn (in ms).
+     *          - distance between the pointer device and the center of the circle drawn.
+     *          - diameter of the circle.
+     *          - index of difficulty (ID).
+     */
     public Map<String, Number> getResult(int i, double initTime) {
         Map<String, Number> map = new LinkedHashMap<>();
         double T = new Date().getTime() - initTime;
