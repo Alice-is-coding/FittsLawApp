@@ -1,6 +1,6 @@
 # Fitt's Law Application.
 
-####1. What is this law about ? 
+#### 1. What is this law about ? 
 
 <p>Fitt's law (1954) is a predictive model of human movement primarily used in HCI (Human-Computer Interaction) and ergonomics.</p>
 <p>According to Fitt's law, human movement can be modeled by analogy to the transmission of information.</p> 
@@ -12,7 +12,7 @@
 * a & b : Constants which depend on the pointing device used (should be obtained with measures, with a various number of different users and a test app).
 </p>
 
-####2. How does the app work ? 
+#### 2. How does the app work ? 
 
 <p>Actually, this is really simple, the HCI isn't really elaborate but it allows to make some experiment about Fitt's law. <br>
 When launching the app (or calling the main method), a main interface appears where a first black circle is drawn.<br>
