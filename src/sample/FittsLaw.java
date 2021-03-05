@@ -36,8 +36,8 @@ public class FittsLaw {
      */
     public void experiment(Group root) {
         // Get the bounds of the screen.
-        Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
+        Screen screen = getPrimary();
+        Rectangle2D bounds = getVisualBounds(screen);
         int min_x = (int) bounds.getMinX();
         int max_x = (int) bounds.getMaxX();
         int min_y = (int) bounds.getMinY();
@@ -113,8 +113,28 @@ public class FittsLaw {
      *
      * @return The diameter of the circle.
      */
-    public double getDiameter() {
+    public int getDiameter() {
         return this.diameter;
+    }
+
+    /**
+     * Primary screen getter.
+     *
+     * @return The primary Screen.
+     */
+    public Screen getPrimary() {
+        return Screen.getPrimary();
+    }
+
+    /**
+     * Visual bounds getter.
+     *
+     * @param screen The characteristics of a graphics destination such as monitor.
+     * @return The visual bounds of this Screen. These bounds account for objects in the native windowing system such as
+     *         task bars and menu bars. These bounds are contained by Screen.bounds
+     */
+    public Rectangle2D getVisualBounds(Screen screen) {
+        return screen.getVisualBounds();
     }
 
     /**
@@ -131,9 +151,9 @@ public class FittsLaw {
      */
     public Map<String, Number> getResult(int i, double initTime) {
         Map<String, Number> map = new LinkedHashMap<>();
-        double T = new Date().getTime() - initTime;
+        int T = (int)(new Date().getTime() - initTime);
         double D = getDistance();
-        double W = getDiameter();
+        int W = getDiameter();
         double ID = calculate_ID();
 
         map.put("i", i);

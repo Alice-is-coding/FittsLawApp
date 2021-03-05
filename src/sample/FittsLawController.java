@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class FittsLawController {
     /** The instance used to transmit request and perform tests. */
-    private final FittsLaw fittsLaw;
+    private FittsLaw fittsLaw;
     /** Max number of tests to be performed (initialized in the initExperiment method). */
     private int maxCount;
     /** Actual counter to be compared to the maxCount above, in order to perform the test (or not). */
@@ -55,6 +55,15 @@ public class FittsLawController {
             root.getChildren().clear();
         }
         return new Date().getTime();
+    }
+
+    /**
+     * FittsLaw setter.
+     *
+     * @param fittsLaw The Fitts law to make experiments.
+     */
+    public void setFittsLaw(FittsLaw fittsLaw) {
+        this.fittsLaw = fittsLaw;
     }
 
     /**
