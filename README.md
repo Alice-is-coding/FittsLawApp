@@ -25,3 +25,6 @@ By default, the pointing device logged into the file is "touchpad".
 <p>If you would like to change the total number of circles drawn, please go to Main.class - line 124 and change controller.initExperiment(5); by whatever number you'd like. <br>
 If you would like to change the type of pointing device used (to be logged in the file), please go to Main.class - line 108 and change resultFormatter = "\nPointing device : touchpad\n"; with whatever type of pointing device you use.
 </p>
+<br><br><br>
+Caution : These experiments have a low scientific value. This experimental protocol is probably too naive, and the huge differences between values obtained make it 
+delicate to build a linear model for T in function of ID. But it's a good exercise though.
